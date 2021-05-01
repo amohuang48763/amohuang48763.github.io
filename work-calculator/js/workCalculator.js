@@ -1,11 +1,12 @@
 var app = new Vue({
     el: '#app',
     data: {
-        startTime: "",
-        endTime: "",
+        startTime: "00:00",
+        endTime: "00:00",
         breakTime: "0",
-        total: "",
-        hourMoney: "",
+        total: "0",
+        hourMoney: "158",
+        dayMoney: "0",
         breakTimeList: [
             { id: "0", text: "0" },
             { id: "0.25", text: "0.25" },
@@ -110,13 +111,10 @@ var app = new Vue({
             { id: "23:15", text: "23:15" },
             { id: "23:30", text: "23:30" },
             { id: "23:45", text: "23:45" },
-
         ]
     },
     computed: {
-        dayHour: function () {
 
-        }
     },
     watch: {
 
@@ -125,15 +123,22 @@ var app = new Vue({
         countHour: function () {
             console.log("countHour");
             let self = this;
-            let startNumber = self.renderHourNumber(self.startTime.replace(":", ""));
-            let endNumber = self.renderHourNumber(self.endTime.replace(":", ""));
-            let breakNumber = parseFloat(self.breakTime);
-            if (endNumber > startNumber) {
-                let count = (endNumber - startNumber);
-                self.total = count - breakNumber;
+            if (self.startTime !== "00:00" || self.endTime !== "00:00") {
+                let startNumber = self.renderHourNumber(self.startTime.replace(":", ""));
+                let endNumber = self.renderHourNumber(self.endTime.replace(":", ""));
+                let breakNumber = parseFloat(self.breakTime);
+                if (endNumber > startNumber) {
+                    let count = (endNumber - startNumber);
+                    self.total = count - breakNumber;
+                    self.dayMoney = self.total * self.hourMoney;
+                } else {
+                    let count = ((24 - startNumber) + endNumber);
+                    self.total = count - breakNumber;
+                    self.dayMoney = 100 + (self.total * self.hourMoney) + endNumber * 40;
+                }
             } else {
-                let count = ((24 - startNumber) + endNumber);
-                self.total = count - breakNumber;
+                self.total = "0";
+                self.dayMoney = "0";
             }
         },
         renderHourNumber: function (str) {

@@ -21,7 +21,7 @@
 	<div class="wrapper">
 
 		<header class="header">
-			<h1>Header</h1>
+			<h1>Miramar</h1>
 		</header><!-- .header-->
 
 		<main class="content" id="app">
@@ -35,14 +35,14 @@
 			<div>
 				<label>下班時間:</label>
 				<!-- <input type="text" inputmode="numeric" v-model:value="endTime" /> -->
-				<select v-model:value="endTime"  @change="countHour()">
+				<select v-model:value="endTime" @change="countHour()">
 					<option v-for="timeObject in timeList" :value="timeObject.id">{{ timeObject.text}}</option>
 				</select>
 			</div>
 			<div>
 				<label>扣休時間:</label>
 				<!-- <input type="text" inputmode="decimal" v-model:value="breakTime" /><br> -->
-				<select v-model:value="breakTime"  @change="countHour()">
+				<select v-model:value="breakTime" @change="countHour()">
 					<option v-for="breakTimeObject in breakTimeList" :value="breakTimeObject.id">{{ breakTimeObject.text
 						}}</option>
 				</select>
@@ -50,18 +50,18 @@
 			<!-- <div>
 				<input type="button" value="Click me" @click="test()" />
 			</div> -->
+			<div>時數: {{ total }}</div>
 			<div>
 				<label>時薪:</label>
 				<input type="text" inputmode="numeric" v-model:value="hourMoney" />元
 			</div>
-			<div>時數: {{ total }}</div>
-			<!-- <div>日薪: {{ dayMoney }}</div> -->
+			<div>日薪: {{ dayMoney }}元</div>
 
-	</main><!-- .content -->
+		</main><!-- .content -->
 
-	<footer class="footer">
+		<footer class="footer">
 
-	</footer><!-- .footer -->
+		</footer><!-- .footer -->
 
 	</div><!-- .wrapper -->
 
