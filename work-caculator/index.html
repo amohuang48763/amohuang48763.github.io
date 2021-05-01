@@ -22,15 +22,15 @@
 		</header><!-- .header-->
 
 		<main class="content" id="app">
-			<label>上班時間:</label></br>
-			<input type="text" inputmode="numeric" v-model:value="startTime" /></br>
-			<label>下班時間:</label></br>
-			<input type="text" inputmode="numeric" v-model:value="endTime" /></br>
-			<label>扣休:</label></br>
-			<input type="text" inputmode="decimal" v-model:value="breakTime" /></br>
+			<label>上班時間:</label><br>
+			<input type="text" inputmode="numeric" v-model:value="startTime" /><br>
+			<label>下班時間:</label><br>
+			<input type="text" inputmode="numeric" v-model:value="endTime" /><br>
+			<label>扣休:</label><br>
+			<input type="text" inputmode="decimal" v-model:value="breakTime" /><br>
 			<div>
 				<input type="button" value="Click me" @click="test()" />
-			</div></br>
+			</div><br>
 			<div>時數: {{ total }}</div>
 		</main><!-- .content -->
 
