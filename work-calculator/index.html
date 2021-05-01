@@ -10,7 +10,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-	<script type="text/javascript" src="./js/workCalculator.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+
 
 </head>
 
@@ -23,28 +25,47 @@
 		</header><!-- .header-->
 
 		<main class="content" id="app">
-			<label>上班時間:</label><br>
-			<input type="time"  v-model:value="startTime" /><br>
-			<label>下班時間:</label><br>
-			<input type="text" inputmode="numeric" v-model:value="endTime" /><br>
-			<label>扣休:</label><br>
-			<!-- <input type="text" inputmode="decimal" v-model:value="breakTime" /><br> -->
-			<select  v-model:value="breakTime">
-				<option v-for="breakTimeObject in breakTimeList" :value="breakTimeObject.id">{{ breakTimeObject.text }}</option>
-			</select>
 			<div>
+				<label>上班時間:</label>
+				<!-- <input type="time" v-model:value="startTime" /> -->
+				<select v-model:value="startTime" @change="countHour()">
+					<option v-for="timeObject in timeList" :value="timeObject.id">{{ timeObject.text}}</option>
+				</select>
+			</div>
+			<div>
+				<label>下班時間:</label>
+				<!-- <input type="text" inputmode="numeric" v-model:value="endTime" /> -->
+				<select v-model:value="endTime"  @change="countHour()">
+					<option v-for="timeObject in timeList" :value="timeObject.id">{{ timeObject.text}}</option>
+				</select>
+			</div>
+			<div>
+				<label>扣休時間:</label>
+				<!-- <input type="text" inputmode="decimal" v-model:value="breakTime" /><br> -->
+				<select v-model:value="breakTime"  @change="countHour()">
+					<option v-for="breakTimeObject in breakTimeList" :value="breakTimeObject.id">{{ breakTimeObject.text
+						}}</option>
+				</select>
+			</div>
+			<!-- <div>
 				<input type="button" value="Click me" @click="test()" />
-			</div><br>
+			</div> -->
+			<div>
+				<label>時薪:</label>
+				<input type="text" inputmode="numeric" v-model:value="hourMoney" />元
+			</div>
 			<div>時數: {{ total }}</div>
-		</main><!-- .content -->
+			<!-- <div>日薪: {{ dayMoney }}</div> -->
 
-		<footer class="footer">
+	</main><!-- .content -->
 
-		</footer><!-- .footer -->
+	<footer class="footer">
+
+	</footer><!-- .footer -->
 
 	</div><!-- .wrapper -->
 
-	
+	<script type="text/javascript" src="./js/workCalculator.js"></script>
 
 </body>
 
