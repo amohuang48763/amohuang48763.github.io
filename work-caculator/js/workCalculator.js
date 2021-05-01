@@ -6,11 +6,11 @@ var app = new Vue({
         breakTime: "0",
         total: "",
         breakTimeList: [
-            { id: "0", text: '0' },
-            { id: "0.25", text: '0.25' },
-            { id: "0.5", text: '0.5' },
-            { id: "0.75", text: '0.75' },
-            { id: "1", text: '1' }
+            { id: "0", text: "0" },
+            { id: "0.25", text: "0.25" },
+            { id: "0.5", text: "0.5" },
+            { id: "0.75", text: "0.75" },
+            { id: "1", text: "1" }
         ]
     },
     methods: {
