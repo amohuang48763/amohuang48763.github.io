@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content:flex-end;
   /* align-items: center; */
-  font-size: 40px;
+  font-size: 38px;
 }
 input{
-    width: 100px;
+    width: 130px;
 }
