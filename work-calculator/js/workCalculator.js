@@ -1,6 +1,7 @@
 var app = new Vue({
     el: '#app',
     data: {
+        defaultDate: "",
         date: new Date().getMonth() + 1 + "/" + new Date().getDate(),
         weekDay: new Date().getDay(),
         weekDayText: "",
@@ -8,9 +9,10 @@ var app = new Vue({
         endTime: "16:00",
         breakTime: "0.5",
         total: "7.5",
-        hourMoney: "158",
+        hourMoney: "160",
         dayMoney: "0",
-        copyInputValue: "",
+        copyInputValue1: "",
+        copyInputValue2: "",
         breakTimeList: [
             { id: "0", text: "0" },
             { id: "0.25", text: "0.25" },
@@ -121,26 +123,51 @@ var app = new Vue({
         let self = this;
         self.countHour();
         switch (self.weekDay) {
-            case 0:
-                self.weekDayText = "一";
             case 1:
-                self.weekDayText = "二";
+                self.weekDayText = "一";
+                break;
             case 2:
-                self.weekDayText = "三";
+                self.weekDayText = "二";
+                break;
             case 3:
-                self.weekDayText = "四";
+                self.weekDayText = "三";
+                break;
             case 4:
-                self.weekDayText = "五";
+                self.weekDayText = "四";
+                break;
             case 5:
-                self.weekDayText = "六";
+                self.weekDayText = "五";
+                break;
             case 6:
+                self.weekDayText = "六";
+                break;
+            case 0:
                 self.weekDayText = "日";
+                break;
         }
+        let date = new Date();
+        let y = date.getFullYear();
+        let m = (date.getMonth() + 1) + "";
+        if (m.length === 1) {
+            m = "0" + m;
+        }
+        let d = (date.getDate()) + "";
+        if (d.length === 1) {
+            d = "0" + d;
+        }
+        self.defaultDate = y + "-" + m + "-" + d;
+        self.date = m + "/" + d;
+        // self.defaultDate=new Date().toLocaleDateString().replaceAll("/","-");
+        console.log(self.defaultDate);
     },
     computed: {
-        showText: function () {
-            console.log("showText");
-            return this.date + "(" + this.weekDayText + ")" + this.startTime + "-" + this.endTime + " " + this.total + " " + this.dayMoney;
+        showText1: function () {
+            console.log("showText1");
+            return this.date + "(" + this.weekDayText + ") " + this.startTime + "~" + this.endTime + "  " + this.total + "  " + this.dayMoney;
+        },
+        showText2:function(){
+            console.log("showText2");
+            return this.date + "(" + this.weekDayText + ") " + this.startTime + "~" + this.endTime + "  " + this.total;
         }
 
     },
@@ -228,14 +255,43 @@ var app = new Vue({
                 self.total = count - breakNumber;
             }
         },
-        copy: function () {
+        changeDate:function(){
+          let self = this;
+          console.log(self.defaultDate);
+          let dateArray = self.defaultDate.split("-");
+          self.date=dateArray[1]+"/"+dateArray[2];
+        },
+        copy1: function () {
             let self = this;
 
-            self.copyInputValue = self.date + "(" + self.weekDayText + ")" + self.startTime + "-" + self.endTime + " " + self.total + " " + self.dayMoney;
+            self.copyInputValue1 = self.date + "(" + self.weekDayText + ") " + self.startTime + "~" + self.endTime + "  " + self.total + "  " + self.dayMoney;
             /* Get the text field */
-            var text = document.getElementById("copyInput");
-            text.value = self.copyInputValue;
-            console.log(self.copyInputValue);
+            let text = document.getElementById("copyInput1");
+            text.value = self.copyInputValue1;
+            console.log(self.copyInputValue1);
+            console.log(text.value);
+            /* Select the text field */
+            text.select();
+            text.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            navigator.clipboard.writeText(text.value)
+                .then(() => { console.log(`Copied!`) })
+                .catch((error) => { console.log(`Copy failed! ${error}`) })
+
+            /* Alert the copied text */
+            alert("Copied :" + text.value);
+        },
+        copy2: function () {
+            let self = this;
+
+            self.copyInputValue2 = self.date + "(" + self.weekDayText + ") " + self.startTime + "~" + self.endTime + "  " + self.total;
+            /* Get the text field */
+            let text = document.getElementById("copyInput2");
+            text.value = self.copyInputValue2;
+            console.log(self.copyInputValue2);
             console.log(text.value);
             /* Select the text field */
             text.select();

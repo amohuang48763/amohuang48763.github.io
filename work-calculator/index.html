@@ -25,8 +25,9 @@
 		</header><!-- .header-->
 
 		<main class="content" id="app">
-			<div>
-				<span>{{ date +"("+weekDayText+")"}}</span>
+			<div class="date">
+				<!-- <span>{{ date +"("+weekDayText+")"}}</span> -->
+				<input type="date" v-model:value="defaultDate" @change="changeDate()" />
 			</div>
 			<div>
 				<label>上班時間:</label>
@@ -60,12 +61,20 @@
 			</div>
 			<div>日薪: {{ dayMoney }}元</div>
 			<div>
-				<span id="copySpan" style="font-size:25px;">{{ showText }}</span>
+				<span style="font-size:25px;">{{ showText1 }}</span>
 				<!-- <span id="copySpan" style="margin-left: 10px;">{{ startTime + "-" + endTime + " " + total + " " + dayMoney }}</span> -->
-				<input id="copyInput" type="text" :value="copyInputValue" style="display: none;">
+				<input id="copyInput1" type="text" :value="copyInputValue1" style="display: none;">
 			</div>
 			<div>
-				<button @click="copy()">複製</button>
+				<button @click="copy1()">複製</button>
+			</div>
+
+			<div>
+				<span style="font-size:25px;">{{ showText2 }}</span>
+				<input id="copyInput2" type="text" :value="copyInputValue2" style="display: none;">
+			</div>
+			<div>
+				<button @click="copy2()">複製</button>
 			</div>
 
 		</main><!-- .content -->
