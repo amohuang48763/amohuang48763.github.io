@@ -46,8 +46,7 @@
 				<label>扣休時間:</label>
 				<!-- <input type="text" inputmode="decimal" v-model:value="breakTime" /><br> -->
 				<select v-model:value="breakTime" @change="countHour()">
-					<option v-for="breakTimeObject in breakTimeList" :value="breakTimeObject.id">{{ breakTimeObject.text
-						}}</option>
+					<option v-for="breakTimeObject in breakTimeList" :value="breakTimeObject.id">{{ breakTimeObject.text}}</option>
 				</select>
 			</div>
 			<!-- <div>
