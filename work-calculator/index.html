@@ -26,6 +26,9 @@
 
 		<main class="content" id="app">
 			<div>
+				<span>{{ date +"("+weekDayText+")"}}</span>
+			</div>
+			<div>
 				<label>上班時間:</label>
 				<!-- <input type="time" v-model:value="startTime" /> -->
 				<select v-model:value="startTime" @change="countHour()">
@@ -58,11 +61,12 @@
 			</div>
 			<div>日薪: {{ dayMoney }}元</div>
 			<div>
-				<span id="copySpan" style="margin-left: 10px;">{{ showText }}</span>
+				<span id="copySpan">{{ showText }}</span>
+				<!-- <span id="copySpan" style="margin-left: 10px;">{{ startTime + "-" + endTime + " " + total + " " + dayMoney }}</span> -->
 				<input id="copyInput" type="text" :value="copyInputValue" style="display: none;">
 			</div>
 			<div>
-				<button style="margin-left: 10px;" @click="copy()">複製</button>
+				<button @click="copy()">複製</button>
 			</div>
 
 		</main><!-- .content -->

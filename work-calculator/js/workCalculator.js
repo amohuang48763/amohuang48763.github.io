@@ -1,13 +1,16 @@
 var app = new Vue({
     el: '#app',
     data: {
+        date: new Date().getMonth() + 1 + "/" + new Date().getDate(),
+        weekDay: new Date().getDay(),
+        weekDayText: "",
         startTime: "08:00",
         endTime: "16:00",
         breakTime: "0.5",
         total: "7.5",
         hourMoney: "158",
         dayMoney: "0",
-        copyInputValue:"",
+        copyInputValue: "",
         breakTimeList: [
             { id: "0", text: "0" },
             { id: "0.25", text: "0.25" },
@@ -117,11 +120,27 @@ var app = new Vue({
     mounted: function () {
         let self = this;
         self.countHour();
+        switch (self.weekDay) {
+            case 0:
+                self.weekDayText = "一";
+            case 1:
+                self.weekDayText = "二";
+            case 2:
+                self.weekDayText = "三";
+            case 3:
+                self.weekDayText = "四";
+            case 4:
+                self.weekDayText = "五";
+            case 5:
+                self.weekDayText = "六";
+            case 6:
+                self.weekDayText = "日";
+        }
     },
     computed: {
         showText: function () {
             console.log("showText");
-            return this.startTime + "-" + this.endTime + " " + this.total + " " + this.dayMoney;
+            return this.date + "(" + this.weekDayText + ")" + this.startTime + "-" + this.endTime + " " + this.total + " " + this.dayMoney;
         }
 
     },
@@ -212,10 +231,10 @@ var app = new Vue({
         copy: function () {
             let self = this;
 
-            self.copyInputValue = self.startTime + "-" + self.endTime + " " + self.total + " " + self.dayMoney;
+            self.copyInputValue = self.date + "(" + self.weekDayText + ")" + self.startTime + "-" + self.endTime + " " + self.total + " " + self.dayMoney;
             /* Get the text field */
             var text = document.getElementById("copyInput");
-            text.value=self.copyInputValue;
+            text.value = self.copyInputValue;
             console.log(self.copyInputValue);
             console.log(text.value);
             /* Select the text field */
@@ -226,8 +245,8 @@ var app = new Vue({
             document.execCommand("copy");
 
             navigator.clipboard.writeText(text.value)
-            .then(() => { console.log(`Copied!`) })
-            .catch((error) => { console.log(`Copy failed! ${error}`) })
+                .then(() => { console.log(`Copied!`) })
+                .catch((error) => { console.log(`Copy failed! ${error}`) })
 
             /* Alert the copied text */
             alert("Copied :" + text.value);
