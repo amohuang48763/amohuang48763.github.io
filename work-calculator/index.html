@@ -61,7 +61,7 @@
 			</div>
 			<div>日薪: {{ dayMoney }}元</div>
 			<div>
-				<span style="font-size:25px;">{{ showText1 }}</span>
+				<span style="font-size:23px;">{{ showText1 }}</span>
 				<!-- <span id="copySpan" style="margin-left: 10px;">{{ startTime + "-" + endTime + " " + total + " " + dayMoney }}</span> -->
 				<input id="copyInput1" type="text" :value="copyInputValue1" style="display: none;">
 			</div>
@@ -70,11 +70,23 @@
 			</div>
 
 			<div>
-				<span style="font-size:25px;">{{ showText2 }}</span>
+				<span style="font-size:23px;">{{ showText2 }}</span>
 				<input id="copyInput2" type="text" :value="copyInputValue2" style="display: none;">
 			</div>
 			<div>
 				<button @click="copy2()">複製</button>
+			</div>
+
+			<div>
+				<label>單位:</label>
+				<input style="width: 160px;" type="text"  v-model:value="employer" />
+			</div>
+			<div>
+				<span style="font-size:20px;">{{ showText3 }}</span>
+				<input id="copyInput3" type="text" :value="copyInputValue3" style="display: none;">
+			</div>
+			<div>
+				<button @click="copy3()">複製</button>
 			</div>
 
 		</main><!-- .content -->

@@ -13,6 +13,8 @@ var app = new Vue({
         dayMoney: "0",
         copyInputValue1: "",
         copyInputValue2: "",
+        copyInputValue3: "",
+        employer: "",
         breakTimeList: [
             { id: "0", text: "0" },
             { id: "0.25", text: "0.25" },
@@ -165,9 +167,13 @@ var app = new Vue({
             console.log("showText1");
             return this.date + "(" + this.weekDayText + ") " + this.startTime + "~" + this.endTime + "  " + this.total + "  " + this.dayMoney;
         },
-        showText2:function(){
+        showText2: function () {
             console.log("showText2");
             return this.date + "(" + this.weekDayText + ") " + this.startTime + "~" + this.endTime + "  " + this.total;
+        },
+        showText3: function () {
+            console.log("showText3");
+            return this.date + "(" + this.weekDayText + ") " + this.startTime + "~" + this.endTime + " " + this.employer + " " + this.breakTime + " " + this.total;
         }
 
     },
@@ -255,11 +261,11 @@ var app = new Vue({
                 self.total = count - breakNumber;
             }
         },
-        changeDate:function(){
-          let self = this;
-          console.log(self.defaultDate);
-          let dateArray = self.defaultDate.split("-");
-          self.date=dateArray[1]+"/"+dateArray[2];
+        changeDate: function () {
+            let self = this;
+            console.log(self.defaultDate);
+            let dateArray = self.defaultDate.split("-");
+            self.date = dateArray[1] + "/" + dateArray[2];
         },
         copy1: function () {
             let self = this;
@@ -282,7 +288,7 @@ var app = new Vue({
                 .catch((error) => { console.log(`Copy failed! ${error}`) })
 
             /* Alert the copied text */
-            alert("Copied :" + text.value);
+            alert("複製 :" + text.value);
         },
         copy2: function () {
             let self = this;
@@ -305,7 +311,30 @@ var app = new Vue({
                 .catch((error) => { console.log(`Copy failed! ${error}`) })
 
             /* Alert the copied text */
-            alert("Copied :" + text.value);
+            alert("複製 :" + text.value);
+        },
+        copy3: function () {
+            let self = this;
+
+            self.copyInputValue3 = self.date + "(" + self.weekDayText + ") " + self.startTime + "~" + self.endTime + " " + self.employer + " " + self.breakTime + " " + self.total;
+            /* Get the text field */
+            let text = document.getElementById("copyInput3");
+            text.value = self.copyInputValue3;
+            console.log(self.copyInputValu3);
+            console.log(text.value);
+            /* Select the text field */
+            text.select();
+            text.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            navigator.clipboard.writeText(text.value)
+                .then(() => { console.log(`Copied!`) })
+                .catch((error) => { console.log(`Copy failed! ${error}`) })
+
+            /* Alert the copied text */
+            alert("複製 :" + text.value);
         }
     }
 })
