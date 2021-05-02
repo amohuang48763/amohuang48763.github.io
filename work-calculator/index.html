@@ -58,8 +58,8 @@
 			</div>
 			<div>日薪: {{ dayMoney }}元</div>
 			<div>
-				<span id="copySpan" style="margin-left: 10px;">{{ copyText }}</span>
-			    <input id="copyInput" type="text" :value="copyInputValue" style="display: none;">
+				<span id="copySpan" style="margin-left: 10px;font-size: 25px;">{{ showText }}</span>
+				<input id="copyInput" type="text" :value="copyInputValue" style="display: none;">
 			</div>
 			<div>
 				<button style="margin-left: 10px;" @click="copy()">複製</button>

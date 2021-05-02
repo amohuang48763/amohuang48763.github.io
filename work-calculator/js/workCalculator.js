@@ -119,7 +119,8 @@ var app = new Vue({
         self.countHour();
     },
     computed: {
-        copyText: function () {
+        showText: function () {
+            console.log("showText");
             return this.startTime + "-" + this.endTime + " " + this.total + " " + this.dayMoney;
         }
 
