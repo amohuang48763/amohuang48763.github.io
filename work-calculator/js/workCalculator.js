@@ -1,12 +1,13 @@
 var app = new Vue({
     el: '#app',
     data: {
-        startTime: "00:00",
-        endTime: "00:00",
-        breakTime: "0",
-        total: "0",
+        startTime: "08:00",
+        endTime: "16:00",
+        breakTime: "0.5",
+        total: "7.5",
         hourMoney: "158",
         dayMoney: "0",
+        copyInputValue:"",
         breakTimeList: [
             { id: "0", text: "0" },
             { id: "0.25", text: "0.25" },
@@ -15,38 +16,6 @@ var app = new Vue({
             { id: "1", text: "1" }
         ],
         timeList: [
-            { id: "00:00", text: "00:00" },
-            { id: "00:15", text: "00:15" },
-            { id: "00:30", text: "00:30" },
-            { id: "00:45", text: "00:45" },
-            { id: "01:00", text: "01:00" },
-            { id: "01:15", text: "01:15" },
-            { id: "01:30", text: "01:30" },
-            { id: "01:45", text: "01:45" },
-            { id: "02:00", text: "02:00" },
-            { id: "02:15", text: "02:15" },
-            { id: "02:30", text: "02:30" },
-            { id: "02:45", text: "02:45" },
-            { id: "03:00", text: "03:00" },
-            { id: "03:15", text: "03:15" },
-            { id: "03:30", text: "03:30" },
-            { id: "03:45", text: "03:45" },
-            { id: "04:00", text: "04:00" },
-            { id: "04:15", text: "04:15" },
-            { id: "04:30", text: "04:30" },
-            { id: "04:45", text: "04:45" },
-            { id: "05:00", text: "05:00" },
-            { id: "05:15", text: "05:15" },
-            { id: "05:30", text: "05:30" },
-            { id: "05:45", text: "05:45" },
-            { id: "06:00", text: "06:00" },
-            { id: "06:15", text: "06:15" },
-            { id: "06:30", text: "06:30" },
-            { id: "06:45", text: "06:45" },
-            { id: "07:00", text: "07:00" },
-            { id: "07:15", text: "07:15" },
-            { id: "07:30", text: "07:30" },
-            { id: "07:45", text: "07:45" },
             { id: "08:00", text: "08:00" },
             { id: "08:15", text: "08:15" },
             { id: "08:30", text: "08:30" },
@@ -111,9 +80,48 @@ var app = new Vue({
             { id: "23:15", text: "23:15" },
             { id: "23:30", text: "23:30" },
             { id: "23:45", text: "23:45" },
+            { id: "00:00", text: "00:00" },
+            { id: "00:15", text: "00:15" },
+            { id: "00:30", text: "00:30" },
+            { id: "00:45", text: "00:45" },
+            { id: "01:00", text: "01:00" },
+            { id: "01:15", text: "01:15" },
+            { id: "01:30", text: "01:30" },
+            { id: "01:45", text: "01:45" },
+            { id: "02:00", text: "02:00" },
+            { id: "02:15", text: "02:15" },
+            { id: "02:30", text: "02:30" },
+            { id: "02:45", text: "02:45" },
+            { id: "03:00", text: "03:00" },
+            { id: "03:15", text: "03:15" },
+            { id: "03:30", text: "03:30" },
+            { id: "03:45", text: "03:45" },
+            { id: "04:00", text: "04:00" },
+            { id: "04:15", text: "04:15" },
+            { id: "04:30", text: "04:30" },
+            { id: "04:45", text: "04:45" },
+            { id: "05:00", text: "05:00" },
+            { id: "05:15", text: "05:15" },
+            { id: "05:30", text: "05:30" },
+            { id: "05:45", text: "05:45" },
+            { id: "06:00", text: "06:00" },
+            { id: "06:15", text: "06:15" },
+            { id: "06:30", text: "06:30" },
+            { id: "06:45", text: "06:45" },
+            { id: "07:00", text: "07:00" },
+            { id: "07:15", text: "07:15" },
+            { id: "07:30", text: "07:30" },
+            { id: "07:45", text: "07:45" },
         ]
     },
+    mounted: function () {
+        let self = this;
+        self.countHour();
+    },
     computed: {
+        copyText: function () {
+            return this.startTime + "-" + this.endTime + " " + this.total + " " + this.dayMoney;
+        }
 
     },
     watch: {
@@ -199,6 +207,29 @@ var app = new Vue({
                 let count = ((2400 - startNumber) + endNumber) / 100;
                 self.total = count - breakNumber;
             }
+        },
+        copy: function () {
+            let self = this;
+
+            self.copyInputValue = self.startTime + "-" + self.endTime + " " + self.total + " " + self.dayMoney;
+            /* Get the text field */
+            var text = document.getElementById("copyInput");
+            text.value=self.copyInputValue;
+            console.log(self.copyInputValue);
+            console.log(text.value);
+            /* Select the text field */
+            text.select();
+            text.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            navigator.clipboard.writeText(text.value)
+            .then(() => { console.log(`Copied!`) })
+            .catch((error) => { console.log(`Copy failed! ${error}`) })
+
+            /* Alert the copied text */
+            alert("Copied :" + text.value);
         }
     }
 })

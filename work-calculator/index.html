@@ -12,7 +12,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
-	
+
 
 </head>
 
@@ -53,9 +53,17 @@
 			<div>時數: {{ total }}</div>
 			<div>
 				<label>時薪:</label>
-				<input style="width: 180px;" type="text" inputmode="numeric" v-model:value="hourMoney" />元
+				<input style="width: 180px;" type="text" inputmode="numeric" v-model:value="hourMoney"
+					@change="countHour()" @input="countHour()" />元
 			</div>
 			<div>日薪: {{ dayMoney }}元</div>
+			<div>
+				<span id="copySpan" style="margin-left: 10px;">{{ copyText }}</span>
+			    <input id="copyInput" type="text" :value="copyInputValue" style="display: none;">
+			</div>
+			<div>
+				<button style="margin-left: 10px;" @click="copy()">複製</button>
+			</div>
 
 		</main><!-- .content -->
 
