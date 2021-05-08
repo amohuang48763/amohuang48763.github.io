@@ -31,7 +31,7 @@
 			</div>
 			<div>
 				<label>上班時間:</label>
-				<input id="startTimeInput" type="text" inputmode="numeric" v-model:value="startTime"  @input="checkTimeInput('startTimeInput')" @focus="clear('startTimeInput')" />
+				<input id="startTimeInput" type="text" inputmode="numeric" v-model:value="startTime"  @input="checkTimeInput('startTimeInput')" @focus="clear('startTimeInput')" @blur="checkEmpty('start')"/>
 				<span>(</span><span style="color: blue;">4</span><span>個數字)</span>
 				<!-- <select v-model:value="startTime" @change="countHour()"> -->
 					<!-- <option v-for="timeObject in timeList" :value="timeObject.id">{{ timeObject.text}}</option> -->
@@ -39,7 +39,7 @@
 			</div>
 			<div>
 				<label>下班時間:</label>
-				<input id="endTimeInput" type="text" inputmode="numeric" v-model:value="endTime" @input="checkTimeInput('endTimeInput')" @focus="clear('endTimeInput')" />
+				<input id="endTimeInput" type="text" inputmode="numeric" v-model:value="endTime" @input="checkTimeInput('endTimeInput')" @focus="clear('endTimeInput')" @blur="checkEmpty('end')"/>
 				<span>(</span><span style="color: blue;">4</span><span>個數字)</span>
 				<!-- <select v-model:value="endTime" @change="countHour()">
 					<option v-for="timeObject in timeList" :value="timeObject.id">{{ timeObject.text}}</option>
@@ -47,7 +47,7 @@
 			</div>
 			<div>
 				<label>扣休時間:</label>
-				<input id="breakTimeInput" type="text" inputmode="decimal" v-model:value="breakTime" @input="checkTimeInput('breakTimeInput')" @focus="clear('breakTimeInput')" />
+				<input id="breakTimeInput" type="text" inputmode="decimal" v-model:value="breakTime" @input="checkTimeInput('breakTimeInput')" @focus="clear('breakTimeInput')" @blur="checkEmpty('break')" />
 				<span>(</span><span style="color: blue;">0.25</span><span>倍數)</span>
 				<!-- <select id="breakTimeSelect" v-model:value="breakTime" @change="countHour()">
 					<option v-for="breakTimeObject in breakTimeList" :value="breakTimeObject.id">{{ breakTimeObject.text}}</option>
@@ -59,8 +59,8 @@
 			<div><span>時數: </span><span style="color:red;font-weight: bold;">{{ total }}</span></div>
 			<div>
 				<label>時薪:</label>
-				<input style="width: 150px;" type="text" inputmode="numeric" v-model:value="hourMoney"
-					@change="countHour()" @input="countHour()" />元
+				<input id="hourMoneyInput" style="width: 150px;" type="text" inputmode="numeric" v-model:value="hourMoney"
+					@change="countHour()" @input="countHour()" @focus="clear('hourMoneyInput')"/>元
 			</div>
 			<div>日薪: {{ dayMoney }}元</div>
 			<div>

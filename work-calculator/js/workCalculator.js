@@ -233,6 +233,31 @@ var app = new Vue({
                 case "breakTimeInput":
                     self.breakTime = "";
                     break;
+                case "hourMoneyInput":
+                    self.hourMoney = "";
+                    self.dayMoney = "";
+                    break;
+            }
+        },
+        checkEmpty: function (key) {
+            let self = this;
+            switch (key) {
+                case "start":
+                    if (self.startTime === "" || self.startTime.length !== 4) {
+                        self.startTime = "0000";
+                    }
+                    break;
+                case "end":
+                    if (self.endTime === "" || self.endTime.length !== 4) {
+                        self.endTime = "0000";
+                    }
+                    break;
+                case "break":
+                    if (self.breakTime === "") {
+                        self.breakTime = "0";
+                        self.countHour();
+                    }
+                    break;
             }
         },
         countHour: function () {
@@ -242,7 +267,7 @@ var app = new Vue({
                 let startNumber = self.renderHourNumber(self.startTime.replace(":", ""));
                 let endNumber = self.renderHourNumber(self.endTime.replace(":", ""));
                 let breakNumber = parseFloat(self.breakTime);
-                if (startNumber !== 0 && endNumber !== 0) {
+                if (startNumber !== 0 || endNumber !== 0) {
                     if (endNumber > startNumber) {
                         let count = (endNumber - startNumber);
                         self.total = count - breakNumber;
