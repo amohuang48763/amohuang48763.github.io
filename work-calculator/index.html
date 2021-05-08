@@ -32,6 +32,7 @@
 			<div>
 				<label>上班時間:</label>
 				<input id="startTimeInput" type="text" inputmode="numeric" v-model:value="startTime"  @input="checkTimeInput('startTimeInput')" @focus="clear('startTimeInput')" />
+				<span>(</span><span style="color: blue;">4</span><span>個數字)</span>
 				<!-- <select v-model:value="startTime" @change="countHour()"> -->
 					<!-- <option v-for="timeObject in timeList" :value="timeObject.id">{{ timeObject.text}}</option> -->
 				<!-- </select> -->
@@ -39,13 +40,15 @@
 			<div>
 				<label>下班時間:</label>
 				<input id="endTimeInput" type="text" inputmode="numeric" v-model:value="endTime" @input="checkTimeInput('endTimeInput')" @focus="clear('endTimeInput')" />
+				<span>(</span><span style="color: blue;">4</span><span>個數字)</span>
 				<!-- <select v-model:value="endTime" @change="countHour()">
 					<option v-for="timeObject in timeList" :value="timeObject.id">{{ timeObject.text}}</option>
 				</select> -->
 			</div>
 			<div>
 				<label>扣休時間:</label>
-				<input id="breakTimeInput" type="text" inputmode="decimal" v-model:value="breakTime" @input="checkTimeInput('breakTimeInput')" @focus="clear('breakTimeInput')" /><br>
+				<input id="breakTimeInput" type="text" inputmode="decimal" v-model:value="breakTime" @input="checkTimeInput('breakTimeInput')" @focus="clear('breakTimeInput')" />
+				<span>(</span><span style="color: blue;">0.25</span><span>倍數)</span>
 				<!-- <select id="breakTimeSelect" v-model:value="breakTime" @change="countHour()">
 					<option v-for="breakTimeObject in breakTimeList" :value="breakTimeObject.id">{{ breakTimeObject.text}}</option>
 				</select> -->
