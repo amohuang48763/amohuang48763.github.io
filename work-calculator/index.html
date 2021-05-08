@@ -45,10 +45,10 @@
 			</div>
 			<div>
 				<label>扣休時間:</label>
-				<!-- <input type="text" inputmode="decimal" v-model:value="breakTime" /><br> -->
-				<select id="breakTimeSelect" v-model:value="breakTime" @change="countHour()">
+				<input id="breakTimeInput" type="text" inputmode="decimal" v-model:value="breakTime" @input="checkTimeInput('breakTimeInput')" @focus="clear('breakTimeInput')" /><br>
+				<!-- <select id="breakTimeSelect" v-model:value="breakTime" @change="countHour()">
 					<option v-for="breakTimeObject in breakTimeList" :value="breakTimeObject.id">{{ breakTimeObject.text}}</option>
-				</select>
+				</select> -->
 			</div>
 			<!-- <div>
 				<input type="button" value="Click me" @click="test()" />

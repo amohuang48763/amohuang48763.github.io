@@ -164,7 +164,7 @@ var app = new Vue({
 
         let startInput = document.getElementById("startTimeInput");
 
-        startInput.addEventListener('focus', function(ev){
+        startInput.addEventListener('focus', function (ev) {
             self.clear('startTimeInput');
         });
 
@@ -203,9 +203,18 @@ var app = new Vue({
                     if (self.endTime.length === 4) {
                         console.log("go");
                         if (self.startTime.length === 4 && self.endTime.length === 4) {
-                          self.countHour();
+                            self.countHour();
                         }
-                        document.getElementById("breakTimeSelect").focus();
+                        // document.getElementById("breakTimeSelect").focus();
+                        document.getElementById("breakTimeInput").focus();
+                    }
+                    break;
+                case "breakTimeInput":
+                    if (parseFloat(self.breakTime) % 0.25 === 0) {
+                        self.countHour();
+                    } else {
+                        self.total = 0;
+                        self.dayMoney = 0;
                     }
                     break;
             }
@@ -220,6 +229,9 @@ var app = new Vue({
                     break;
                 case "endTimeInput":
                     self.endTime = "";
+                    break;
+                case "breakTimeInput":
+                    self.breakTime = "";
                     break;
             }
         },
