@@ -181,10 +181,45 @@ var app = new Vue({
 
     },
     methods: {
+        checkTimeInput: function (key) {
+            console.log("checkTimeInput");
+            console.log(key);
+            let self = this;
+            switch (key) {
+                case "startTimeInput":
+                    if (self.startTime.length === 4) {
+                        console.log("go");
+                        document.getElementById("endTimeInput").focus();
+                    }
+                    break;
+                case "endTimeInput":
+                    if (self.endTime.length === 4) {
+                        console.log("go");
+                        if (self.startTime.length === 4 && self.endTime.length === 4) {
+                          self.countHour();
+                        }
+                        document.getElementById("breakTimeSelect").focus();
+                    }
+                    break;
+            }
+        },
+        clear: function (key) {
+            console.log("clear");
+            console.log(key);
+            let self = this;
+            switch (key) {
+                case "startTimeInput":
+                    self.startTime = "";
+                    break;
+                case "endTimeInput":
+                    self.endTime = "";
+                    break;
+            }
+        },
         countHour: function () {
             console.log("countHour");
             let self = this;
-            if (self.startTime !== "00:00" || self.endTime !== "00:00") {
+            if (self.startTime !== "0000" || self.endTime !== "0000") {
                 let startNumber = self.renderHourNumber(self.startTime.replace(":", ""));
                 let endNumber = self.renderHourNumber(self.endTime.replace(":", ""));
                 let breakNumber = parseFloat(self.breakTime);
@@ -197,6 +232,20 @@ var app = new Vue({
                     self.total = count - breakNumber;
                     self.dayMoney = 100 + (self.total * self.hourMoney) + endNumber * 40;
                 }
+                /* 開始時間是0000之後-0600 */
+                let nightCount = 0;
+                let startHour = parseInt(self.startTime.substring(0, 2));
+                let endHour = parseInt(self.endTime.substring(0, 2));
+                if (startHour < 6) {
+                    let lessTime = endHour - 6;
+                    if (endHour > 6) {
+                        nightCount = endNumber - lessTime - startHour;
+                    } else {
+                        nightCount = endNumber - startNumber;
+                    }
+                    self.dayMoney = self.dayMoney + nightCount * 40;
+                }
+
             } else {
                 self.total = "0";
                 self.dayMoney = "0";

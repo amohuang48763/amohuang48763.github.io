@@ -31,32 +31,32 @@
 			</div>
 			<div>
 				<label>上班時間:</label>
-				<!-- <input type="time" v-model:value="startTime" /> -->
-				<select v-model:value="startTime" @change="countHour()">
-					<option v-for="timeObject in timeList" :value="timeObject.id">{{ timeObject.text}}</option>
-				</select>
+				<input id="startTimeInput" type="text" inputmode="numeric" v-model:value="startTime"  @input="checkTimeInput('startTimeInput')" @focus="clear('startTimeInput')" />
+				<!-- <select v-model:value="startTime" @change="countHour()"> -->
+					<!-- <option v-for="timeObject in timeList" :value="timeObject.id">{{ timeObject.text}}</option> -->
+				<!-- </select> -->
 			</div>
 			<div>
 				<label>下班時間:</label>
-				<!-- <input type="text" inputmode="numeric" v-model:value="endTime" /> -->
-				<select v-model:value="endTime" @change="countHour()">
+				<input id="endTimeInput" type="text" inputmode="numeric" v-model:value="endTime" @input="checkTimeInput('endTimeInput')" @focus="clear('endTimeInput')" />
+				<!-- <select v-model:value="endTime" @change="countHour()">
 					<option v-for="timeObject in timeList" :value="timeObject.id">{{ timeObject.text}}</option>
-				</select>
+				</select> -->
 			</div>
 			<div>
 				<label>扣休時間:</label>
 				<!-- <input type="text" inputmode="decimal" v-model:value="breakTime" /><br> -->
-				<select v-model:value="breakTime" @change="countHour()">
+				<select id="breakTimeSelect" v-model:value="breakTime" @change="countHour()">
 					<option v-for="breakTimeObject in breakTimeList" :value="breakTimeObject.id">{{ breakTimeObject.text}}</option>
 				</select>
 			</div>
 			<!-- <div>
 				<input type="button" value="Click me" @click="test()" />
 			</div> -->
-			<div>時數: {{ total }}</div>
+			<div><span style="color:red">時數: {{ total }}</span></div>
 			<div>
 				<label>時薪:</label>
-				<input style="width: 180px;" type="text" inputmode="numeric" v-model:value="hourMoney"
+				<input style="width: 150px;" type="text" inputmode="numeric" v-model:value="hourMoney"
 					@change="countHour()" @input="countHour()" />元
 			</div>
 			<div>日薪: {{ dayMoney }}元</div>
