@@ -242,29 +242,34 @@ var app = new Vue({
                 let startNumber = self.renderHourNumber(self.startTime.replace(":", ""));
                 let endNumber = self.renderHourNumber(self.endTime.replace(":", ""));
                 let breakNumber = parseFloat(self.breakTime);
-                if (endNumber > startNumber) {
-                    let count = (endNumber - startNumber);
-                    self.total = count - breakNumber;
-                    self.dayMoney = self.total * self.hourMoney;
-                } else {
-                    let count = ((24 - startNumber) + endNumber);
-                    self.total = count - breakNumber;
-                    self.dayMoney = 100 + (self.total * self.hourMoney) + endNumber * 40;
-                }
-                /* 開始時間是0000之後-0600 */
-                let nightCount = 0;
-                let startHour = parseInt(self.startTime.substring(0, 2));
-                let endHour = parseInt(self.endTime.substring(0, 2));
-                if (startHour < 6) {
-                    let lessTime = endHour - 6;
-                    if (endHour > 6) {
-                        nightCount = endNumber - lessTime - startHour;
+                if (startNumber !== 0 && endNumber !== 0) {
+                    if (endNumber > startNumber) {
+                        let count = (endNumber - startNumber);
+                        self.total = count - breakNumber;
+                        self.dayMoney = self.total * self.hourMoney;
                     } else {
-                        nightCount = endNumber - startNumber;
+                        let count = ((24 - startNumber) + endNumber);
+                        self.total = count - breakNumber;
+                        self.dayMoney = 100 + (self.total * self.hourMoney) + endNumber * 40;
                     }
-                    self.dayMoney = self.dayMoney + nightCount * 40;
-                }
 
+                    /* 開始時間是0000之後-0600 */
+                    let nightCount = 0;
+                    let startHour = parseInt(self.startTime.substring(0, 2));
+                    let endHour = parseInt(self.endTime.substring(0, 2));
+                    if (startHour < 6) {
+                        let lessTime = endHour - 6;
+                        if (endHour > 6) {
+                            nightCount = endNumber - lessTime - startHour;
+                        } else {
+                            nightCount = endNumber - startNumber;
+                        }
+                        self.dayMoney = self.dayMoney + nightCount * 40;
+                    }
+                } else {
+                    self.total = "0";
+                    self.dayMoney = "0";
+                }
             } else {
                 self.total = "0";
                 self.dayMoney = "0";
@@ -289,8 +294,16 @@ var app = new Vue({
                 case "45":
                     minNumber = 0.75;
                     break;
+                default:
+                    minNumber = -1;
+                    break;
             }
-            return parseInt(hourtStr) + minNumber;
+            if (parseInt(hourtStr) > 23 || minNumber === -1) {
+                return 0;
+            } else {
+
+                return parseInt(hourtStr) + minNumber;
+            }
         },
         test: function () {
             console.log("test");
