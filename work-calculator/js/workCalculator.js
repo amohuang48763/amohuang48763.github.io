@@ -161,6 +161,13 @@ var app = new Vue({
         self.date = m + "/" + d;
         // self.defaultDate=new Date().toLocaleDateString().replaceAll("/","-");
         console.log(self.defaultDate);
+
+        let startInput = document.getElementById("startTimeInput");
+
+        startInput.addEventListener('focus', function(ev){
+            self.clear('startTimeInput');
+        });
+
     },
     computed: {
         showText1: function () {
