@@ -188,6 +188,32 @@ var app = new Vue({
 
     },
     methods: {
+        reloadWeekDay:function(){
+            let self = this;
+            switch (self.weekDay) {
+                case 1:
+                    self.weekDayText = "一";
+                    break;
+                case 2:
+                    self.weekDayText = "二";
+                    break;
+                case 3:
+                    self.weekDayText = "三";
+                    break;
+                case 4:
+                    self.weekDayText = "四";
+                    break;
+                case 5:
+                    self.weekDayText = "五";
+                    break;
+                case 6:
+                    self.weekDayText = "六";
+                    break;
+                case 0:
+                    self.weekDayText = "日";
+                    break;
+            }
+        },
         checkTimeInput: function (key) {
             console.log("checkTimeInput");
             console.log(key);
@@ -372,6 +398,9 @@ var app = new Vue({
             console.log(self.defaultDate);
             let dateArray = self.defaultDate.split("-");
             self.date = dateArray[1] + "/" + dateArray[2];
+            self.weekDay = new Date(self.defaultDate).getDay();
+            console.log(self.weekDay);
+            self.reloadWeekDay();
         },
         copy1: function () {
             let self = this;
