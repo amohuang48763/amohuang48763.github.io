@@ -9,7 +9,7 @@ var app = new Vue({
         endTime: "0000",
         breakTime: "0.5",
         total: "7.5",
-        hourMoney: "160",
+        hourMoney: "183",
         dayMoney: "0",
         copyInputValue1: "",
         copyInputValue2: "",
